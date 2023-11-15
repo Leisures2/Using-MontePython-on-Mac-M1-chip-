@@ -9,3 +9,15 @@ Commenting `OMPFLAG   = -fopenmp` in the Makefile and `extra_link_args=['-lgomp'
 We also can set an `arm64` python environment using `CONDA_SUBDIR=osx-arm64 conda create -n py39_native python=3.9 -c conda-forge --override-channels` then `conda env config vars set CONDA_SUBDIR=osx-arm64`. As authors of https://github.com/lesgourg/class_public/issues/384#issue-786806079 says, we can do all of the work on `arm64` if we have a total python environment including `numpy`. However, the python of `arm64` doesn't support some necessary packages of `intel-mkl` for `class` so we only choose `x86_64` and limit the ability of parallelising.
 
 # MontePython setting
+Setting `PATH` environment variable:
+`echo $SHELL` verify the type of `SHELL`,for instance `~/.zshrc` is SHELL file of Mac now. Then modify `PATH` by: 
+1.`echo $PATH` and copy it's value
+2.`export PATH=""`
+3.`export PATH="/path/you/want/to/keep"`
+
+Edit `MontePython.py` : change the first line to where the python distribution located `/Users/durian/opt/anaconda3/envs/MontePy/bin/python`.
+
+Copy and rename `default.conf`: At minimum, this file should contain one line: `path['cosmo'] =  path/to/your/class` and call MontePython.py with the option `--conf my.conf`
+
+At least `MontePython` can be used now.
+
